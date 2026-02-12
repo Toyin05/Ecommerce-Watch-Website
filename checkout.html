@@ -1042,6 +1042,28 @@
                 grid-column: span 2;
                 justify-content: space-between;
             }
+            
+            /* Mobile button spacing fix */
+            .checkout__actions {
+                flex-direction: column;
+                gap: 1rem;
+                padding-top: 1.5rem;
+            }
+            
+            .checkout__actions .button {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 1.5rem;
+                font-size: var(--normal-font-size);
+            }
+            
+            .checkout__actions .button--gray {
+                order: 1;
+            }
+            
+            .checkout__actions .checkout__submit {
+                order: 2;
+            }
         }
     </style>
 </body>
