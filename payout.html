@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!--=============== BOXICONS ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <!--=============== SONNER TOAST ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sonner@1.4.0/dist/sonner.css">
+    <script src="https://cdn.jsdelivr.net/npm/sonner@1.4.0/dist/sonner.umd.js"></script>
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <title>Payment</title>
+</head>
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">
+                <i class='bx bxs-watch nav__logo-icon'></i> ROLEX
+            </a>
+
+            <div class="nav__btns">
+                <!-- Theme change button -->
+                <i class='bx bx-moon change-theme' id="theme-button"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!--==================== MAIN ====================-->
+    <main class="main">
+        <!--==================== PAYOUT ====================-->
+        <section class="payout section container">
+            <div class="payout__secure">
+                <i class='bx bx-shield'></i>
+                <span>Secure Payment</span>
+            </div>
+
+            <h2 class="section__title">
+                Complete Your Order
+            </h2>
+
+            <div class="payout__container grid">
+                <!-- Payment Form -->
+                <div class="payout__form-section">
+                    <!-- Order Summary -->
+                    <div class="payout__order-summary">
+                        <h3 class="payout__section-title">Order Summary</h3>
+                        <div id="payout-items">
+                            <!-- Dynamic items will be rendered here -->
+                        </div>
+                        
+                        <div class="payout__summary-totals">
+                            <div class="payout__summary-row">
+                                <span>Subtotal</span>
+                                <span>₦<span id="payout-subtotal">0</span></span>
+                            </div>
+                            <div class="payout__summary-row">
+                                <span>Shipping</span>
+                                <span>Free</span>
+                            </div>
+                            <div class="payout__summary-row payout__total">
+                                <span>Total</span>
+                                <span>₦<span id="payout-total">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method Info -->
+                    <div class="payout__payment-info">
+                        <h3 class="payout__section-title">Payment Method</h3>
+                        <div id="payment-method-display" class="payment-method-display">
+                            <!-- Dynamic payment method will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Customer Info -->
+                    <div class="payout__customer-info">
+                        <h3 class="payout__section-title">Customer Information</h3>
+                        <div id="customer-details">
+                            <!-- Dynamic customer info will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Payment Form -->
+                    <div class="payout__payment-section">
+                        <h3 class="payout__section-title">Payment Details</h3>
+                        
+                        <!-- Card Form -->
+                        <form id="card-payment-form" class="card-form">
+                            <div class="card-form__header">
+                                <i class='bx bx-credit-card'></i>
+                                <span>Credit or Debit Card</span>
+                            </div>
+                            
+                            <div class="card-form__input-group">
+                                <label for="cardNumber">Card Number</label>
+                                <div class="card-input-wrapper">
+                                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                    <div class="card-icons">
+                                        <i class='bx bxl-visa'></i>
+                                        <i class='bx bxl-mastercard'></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card-form__row">
+                                <div class="card-form__input-group">
+                                    <label for="cardExpiry">Expiry Date</label>
+                                    <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
+                                </div>
+                                <div class="card-form__input-group">
+                                    <label for="cardCvc">CVC</label>
+                                    <div class="cvc-wrapper">
+                                        <input type="text" id="cardCvc" placeholder="123" maxlength="4" required>
+                                        <i class='bx bx-help-circle' title="3 or 4 digit code on the back of your card"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card-form__input-group">
+                                <label for="cardName">Name on Card</label>
+                                <input type="text" id="cardName" placeholder="John Doe" required>
+                            </div>
+
+                            <div class="card-form__secure">
+                                <i class='bx bx-lock-alt'></i>
+                                <span>Your payment information is encrypted and secure</span>
+                            </div>
+                        </form>
+
+                        <!-- Bank Transfer Info -->
+                        <div class="payout__banktransfer" id="banktransfer-section" style="display: none;">
+                            <div class="banktransfer-info">
+                                <h4>Bank Transfer Details</h4>
+                                <p><strong>Bank:</strong> Guaranty Trust Bank (GTBank)</p>
+                                <p><strong>Account Name:</strong> Oluwatoyin Ojumoro Watches</p>
+                                <p>
+                                    <strong>Account Number:</strong> 
+                                    <span id="account-number">0123456789</span>
+                                    <button type="button" class="copy-btn" onclick="copyAccountNumber()" title="Copy to clipboard">
+                                        <i class='bx bx-copy'></i>
+                                    </button>
+                                </p>
+                                <p class="banktransfer-note">
+                                    <i class='bx bx-info-circle'></i> 
+                                    Please include your <strong>Order Number</strong> (<span id="order-number-display">---</span>) as your payment narration/reference
+                                </p>
+                            </div>
+                            <div class="banktransfer-waiting">
+                                <div class="whatsapp-instruction">
+                                    <p><i class='bx bx-message-rounded-dots'></i> <strong>Next Steps:</strong></p>
+                                    <ol>
+                                        <li>Complete your bank transfer</li>
+                                        <li>Send payment receipt to our WhatsApp: 
+                                            <a href="https://wa.me/2341234567890" target="_blank" class="whatsapp-link">
+                                                <svg class="whatsapp-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                                </svg>
+                                                +234 1234 567 890
+                                            </a>
+                                        </li>
+                                        <li>Include your Order Number in the message</li>
+                                        <li>Our team will confirm and process your order</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="payout__actions">
+                        <a href="checkout.html" class="button button--gray button--small">
+                            <i class='bx bx-arrow-back'></i> Back to Checkout
+                        </a>
+                        
+                        <button type="button" class="button payout__submit" id="pay-now">
+                            <span id="pay-button-text">Pay Now</span>
+                            <span id="pay-amount">₦0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="payout__trust-section">
+                    <h3 class="payout__section-title">Why Shop With Us?</h3>
+                    
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <i class='bx bx-shield-check'></i>
+                            <h4>Secure Payment</h4>
+                            <p>100% secure payment processing</p>
+                        </div>
+                        
+                        <div class="trust-badge">
+                            <i class='bx bx-package'></i>
+                            <h4>Nationwide Delivery</h4>
+                            <p>Free shipping across Nigeria</p>
+                        </div>
+                        
+                        <div class="trust-badge">
+                            <i class='bx bx-undo'></i>
+                            <h4>7-Day Returns</h4>
+                            <p>Easy returns and exchanges</p>
+                        </div>
+                        
+                        <div class="trust-badge">
+                            <i class='bx bx-headphone'></i>
+                            <h4>24/7 Support</h4>
+                            <p>Dedicated customer support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer section">
+        <div class="footer__container container grid">
+            <div class="footer__content">
+                <h3 class="footer__title">Our information</h3>
+
+                <ul class="footer__list">
+                    <li>Haruk Estate</li>
+                    <li>Rivers, Nigeria</li>
+                    <li>+234 123 456 789</li>
+                </ul>
+            </div>
+            <div class="footer__content">
+                <h3 class="footer__title">About Us</h3>
+
+                <ul class="footer__links">
+                    <li>
+                        <a href="#" class="footer__link">Support Center</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Customer Support</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Copy Right</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Product</h3>
+
+                <ul class="footer__links">
+                    <li>
+                        <a href="#" class="footer__link">Wrist Watches</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Smart Watches</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Accessories</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Watch Bands</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Social</h3>
+
+                <ul class="footer__social">
+                    <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-facebook'></i>
+                    </a>
+
+                    <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-twitter' ></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-instagram' ></i>
+                    </a>
+                </ul>
+            </div>
+        </div>
+
+        <span class="footer__copy">&#169; 2026 Oluwatoyin Ojumoro. All rights reserved. Built with passion.</span>
+    </footer>
+
+    <!--=============== SCROLL UP ===============-->
+    <a href="#" class="scrollup" id="scroll-up"> 
+        <i class='bx bx-up-arrow-alt scrollup__icon' ></i>
+    </a>
+
+    <!--=============== PAYOUT JS ===============-->
+    <script>
+        console.log('=== PAYOUT PAGE SCRIPT STARTING ===');
+        
+        /*=============== SONNER TOAST INITIALIZATION ===============*/
+        var Toaster = window.Toaster;
+        if (!Toaster && window.sonner && window.sonner.Toaster) {
+            Toaster = window.sonner.Toaster;
+        }
+        var toaster = null;
+        
+        if (typeof Toaster === 'function') {
+            try {
+                toaster = new Toaster({
+                    position: 'top-right',
+                    toastOptions: {
+                        duration: 4000,
+                        style: {
+                            background: '#333',
+                            color: '#fff',
+                        },
+                    }
+                });
+            } catch(e) {
+                console.warn('Sonner toaster initialization failed:', e);
+            }
+        }
+
+        /*=============== FALLBACK TOAST FUNCTION ===============*/
+        function showToast(message, type) {
+            type = type || 'success';
+            
+            if (toaster && typeof toaster[type] === 'function') {
+                try {
+                    toaster[type](message);
+                    return;
+                } catch(e) {
+                    console.warn('Toast failed:', e);
+                }
+            }
+            
+            var toast = document.createElement('div');
+            toast.className = 'toast-notification toast-' + type;
+            var icon = 'bx-check-circle';
+            if (type === 'error') icon = 'bx-error-circle';
+            else if (type === 'info') icon = 'bx-info-circle';
+            toast.innerHTML = '<i class="bx ' + icon + '"></i><span>' + message + '</span>';
+            
+            var bgColor = '#10b981';
+            if (type === 'error') bgColor = '#ef4444';
+            else if (type === 'info') bgColor = '#3b82f6';
+            
+            toast.style.cssText = 'position: fixed; top: 20px; right: 20px; background: ' + bgColor + '; color: #fff; padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 10px; z-index: 9999; animation: slideIn 0.3s ease; font-family: var(--body-font);';
+            
+            if (!document.getElementById('toast-styles')) {
+                var style = document.createElement('style');
+                style.id = 'toast-styles';
+                style.textContent = '@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } } @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }';
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(function() {
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(function() {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        /*=============== COPY ACCOUNT NUMBER ===============*/
+        function copyAccountNumber() {
+            var accountNum = document.getElementById('account-number').textContent;
+            navigator.clipboard.writeText(accountNum).then(function() {
+                showToast('Account number copied!', 'success');
+            }).catch(function() {
+                var textArea = document.createElement('textarea');
+                textArea.value = accountNum;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast('Account number copied!', 'success');
+            });
+        }
+
+        /*=============== SAFE LOCALSTORAGE PARSE ===============*/
+        function safeParseJSON(str, defaultValue) {
+            if (!str) return defaultValue || null;
+            try {
+                return JSON.parse(str);
+            } catch(e) {
+                console.warn('Failed to parse JSON:', e);
+                return defaultValue || null;
+            }
+        }
+
+        /*=============== LOAD CART FROM LOCALSTORAGE ===============*/
+        function getCart() {
+            var orderDataStr = localStorage.getItem('orderData');
+            var cartStr = localStorage.getItem('cart');
+            
+            var orderData = safeParseJSON(orderDataStr, null);
+            var cart = safeParseJSON(cartStr, []);
+            
+            if (orderData && Array.isArray(orderData.items) && orderData.items.length > 0) {
+                return orderData.items;
+            }
+            
+            if (orderData && orderData.items && typeof orderData.items === 'object' && !Array.isArray(orderData.items)) {
+                var itemsArray = Object.values(orderData.items);
+                if (itemsArray.length > 0) {
+                    return itemsArray;
+                }
+            }
+            
+            if (Array.isArray(cart) && cart.length > 0) {
+                return cart;
+            }
+            
+            return [];
+        }
+
+        /*=============== CALCULATE TOTAL ===============*/
+        function calculateTotal() {
+            var cart = getCart();
+            var total = 0;
+            if (Array.isArray(cart)) {
+                for (var i = 0; i < cart.length; i++) {
+                    var item = cart[i];
+                    total += (parseFloat(item.price) || 0) * (parseInt(item.quantity) || 0);
+                }
+            }
+            return total;
+        }
+
+        /*=============== RENDER PAYOUT ITEMS ===============*/
+        function renderPayoutItems() {
+            var payoutItems = document.getElementById('payout-items');
+            if (!payoutItems) {
+                return;
+            }
+            
+            var cart = getCart();
+            var total = calculateTotal();
+            
+            var subtotalEl = document.getElementById('payout-subtotal');
+            var totalEl = document.getElementById('payout-total');
+            var payAmountEl = document.getElementById('pay-amount');
+            
+            if (subtotalEl) subtotalEl.textContent = total.toLocaleString();
+            if (totalEl) totalEl.textContent = total.toLocaleString();
+            if (payAmountEl) payAmountEl.textContent = '₦' + total.toLocaleString();
+            
+            if (!Array.isArray(cart) || cart.length === 0) {
+                payoutItems.innerHTML = '<div class="payout__empty"><i class="bx bx-shopping-bag"></i><p>No items in your order</p><a href="index.html" class="button">Go Shopping</a></div>';
+                return;
+            }
+            
+            var html = '';
+            for (var i = 0; i < cart.length; i++) {
+                var item = cart[i];
+                if (!item || typeof item !== 'object') continue;
+                
+                var itemPrice = parseFloat(item.price) || 0;
+                var itemQty = parseInt(item.quantity) || 0;
+                var itemTotal = itemPrice * itemQty;
+                
+                html += '<div class="payout__item">';
+                html += '<div class="payout__item-img">';
+                html += '<img src="' + (item.img || '') + '" alt="' + (item.name || 'Product') + '">';
+                html += '<span class="payout__item-qty">' + itemQty + '</span>';
+                html += '</div>';
+                html += '<div class="payout__item-info">';
+                html += '<h4>' + (item.name || 'Unknown Product') + '</h4>';
+                html += '<span class="payout__item-price">₦' + itemPrice.toLocaleString() + ' each</span>';
+                html += '</div>';
+                html += '<div class="payout__item-total">₦' + itemTotal.toLocaleString() + '</div>';
+                html += '</div>';
+            }
+            payoutItems.innerHTML = html;
+        }
+
+        /*=============== RENDER CUSTOMER INFO ===============*/
+        function renderCustomerInfo() {
+            var customerDetails = document.getElementById('customer-details');
+            if (!customerDetails) return;
+            
+            var orderData = safeParseJSON(localStorage.getItem('orderData'), null);
+            
+            if (!orderData) {
+                customerDetails.innerHTML = '<p>No order information available</p>';
+                return;
+            }
+            
+            var customer = orderData.customer || {};
+            var shipping = orderData.shipping || {};
+            
+            customerDetails.innerHTML = '<div class="customer-info-grid">' +
+                '<div class="customer-info-item"><label>Name</label><span>' + (customer.firstName || '') + ' ' + (customer.lastName || '') + '</span></div>' +
+                '<div class="customer-info-item"><label>Email</label><span>' + (customer.email || '') + '</span></div>' +
+                '<div class="customer-info-item"><label>Phone</label><span>' + (customer.phone || '') + '</span></div>' +
+                '<div class="customer-info-item full-width"><label>Shipping Address</label><span>' + (shipping.address || '') + ', ' + (shipping.city || '') + (shipping.state ? ', ' + shipping.state : '') + ', Nigeria</span></div>' +
+                '</div>';
+        }
+
+        /*=============== RENDER PAYMENT METHOD ===============*/
+        function renderPaymentMethod() {
+            var paymentDisplay = document.getElementById('payment-method-display');
+            if (!paymentDisplay) return;
+            
+            var orderData = safeParseJSON(localStorage.getItem('orderData'), null);
+            
+            if (!orderData) {
+                paymentDisplay.innerHTML = '<p>No payment method selected</p>';
+                return;
+            }
+            
+            var method = orderData.payment || 'card';
+            var methodNames = {
+                'card': 'Credit/Debit Card',
+                'bank': 'Bank Transfer'
+            };
+            var methodIcons = {
+                'card': 'bx-credit-card',
+                'bank': 'bx-building'
+            };
+            
+            paymentDisplay.innerHTML = '<div class="payment-method-selected">' +
+                '<i class="bx ' + (methodIcons[method] || 'bx-credit-card') + '"></i>' +
+                '<span>' + (methodNames[method] || 'Credit/Debit Card') + '</span>' +
+                '</div>' +
+                '<p class="payment-method-note">Selected on checkout</p>';
+        }
+
+        /*=============== SETUP PAYMENT METHOD UI ===============*/
+        function setupPaymentMethodUI() {
+            var cardForm = document.getElementById('card-payment-form');
+            var banktransferSection = document.getElementById('banktransfer-section');
+            var orderData = safeParseJSON(localStorage.getItem('orderData'), null);
+            var payButtonText = document.getElementById('pay-button-text');
+            
+            var paymentMethod = orderData ? orderData.payment : 'card';
+            
+            if (cardForm) {
+                cardForm.style.display = paymentMethod === 'card' ? 'block' : 'none';
+            }
+            if (banktransferSection) {
+                banktransferSection.style.display = paymentMethod === 'bank' ? 'block' : 'none';
+            }
+            
+            if (payButtonText) {
+                if (paymentMethod === 'bank') {
+                    payButtonText.innerHTML = 'Continue';
+                } else {
+                    payButtonText.innerHTML = 'Pay Now';
+                }
+            }
+        }
+
+        /*=============== CARD INPUT FORMATTING ===============*/
+        function setupCardInputFormatting() {
+            var cardNumber = document.getElementById('cardNumber');
+            var cardExpiry = document.getElementById('cardExpiry');
+            var cardCvc = document.getElementById('cardCvc');
+            
+            if (cardNumber) {
+                cardNumber.addEventListener('input', function(e) {
+                    var value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
+                    value = value.match(/.{1,4}/g) ? value.match(/.{1,4}/g).join(' ') : value;
+                    e.target.value = value;
+                });
+            }
+            
+            if (cardExpiry) {
+                cardExpiry.addEventListener('input', function(e) {
+                    var value = e.target.value.replace(/\D/g, '');
+                    var cursorPos = e.target.selectionStart;
+                    var oldLength = e.target.value.length;
+                    
+                    if (value.length >= 2) {
+                        if (!e.target.value.includes('/')) {
+                            value = value.slice(0, 2) + '/' + value.slice(2);
+                        }
+                    }
+                    
+                    e.target.value = value;
+                    
+                    var newLength = e.target.value.length;
+                    if (newLength > oldLength && cursorPos === 2) {
+                        e.target.setSelectionRange(3, 3);
+                    }
+                });
+            }
+            
+            if (cardCvc) {
+                cardCvc.addEventListener('input', function(e) {
+                    e.target.value = e.target.value.replace(/\D/g, '');
+                });
+            }
+        }
+
+        /*=============== RESET PAY BUTTON ===============*/
+        function resetPayButton() {
+            var payButton = document.getElementById('pay-now');
+            var payButtonText = document.getElementById('pay-button-text');
+            var orderData = safeParseJSON(localStorage.getItem('orderData'), null);
+            var paymentMethod = orderData ? orderData.payment : 'card';
+            
+            if (payButton) {
+                payButton.disabled = false;
+            }
+            if (payButtonText) {
+                payButtonText.innerHTML = paymentMethod === 'bank' ? 'Continue' : 'Pay Now';
+            }
+        }
+
+        /*=============== SHOW SUCCESS MODAL ===============*/
+        function showSuccessModal(orderNumber, totalAmount) {
+            var modal = document.createElement('div');
+            modal.className = 'success-modal-overlay';
+            modal.innerHTML = '<div class="success-modal">' +
+                '<div class="success-modal-icon"><i class="bx bx-check-circle"></i></div>' +
+                '<h2 class="success-modal-title">Thank You for Your Order!</h2>' +
+                '<p class="success-modal-order">Order Number: <strong>' + orderNumber + '</strong></p>' +
+                '<p class="success-modal-amount">Total Amount: <strong>₦' + totalAmount.toLocaleString() + '</strong></p>' +
+                '<div class="success-modal-details">' +
+                '<p><i class="bx bx-package"></i> Your order has been received and is being processed.</p>' +
+                '<p><i class="bx bx-time"></i> We will contact you within 24 hours to confirm delivery.</p>' +
+                '</div>' +
+                '<div class="success-modal-actions">' +
+                '<a href="index.html" class="button success-modal-btn">' +
+                '<i class="bx bx-store"></i> Continue Shopping' +
+                '</a>' +
+                '</div>' +
+                '</div>';
+            
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 10000; animation: fadeIn 0.3s ease;';
+            
+            var style = document.createElement('style');
+            style.id = 'modal-styles';
+            style.textContent = '@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }' +
+                '.success-modal { background: var(--container-color, #fff); padding: 2.5rem; border-radius: 16px; text-align: center; max-width: 420px; width: 90%; animation: slideUp 0.3s ease; }' +
+                '@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }' +
+                '.success-modal-icon { font-size: 4rem; color: var(--first-color, #ff9900); margin-bottom: 1rem; }' +
+                '.success-modal-title { font-size: 1.5rem; margin-bottom: 1rem; color: var(--title-color, #333); }' +
+                '.success-modal-order { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-color, #666); }' +
+                '.success-modal-amount { font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--first-color, #ff9900); font-weight: bold; }' +
+                '.success-modal-details { background: var(--body-color, #f5f5f5); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; text-align: left; }' +
+                '.success-modal-details p { margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-color, #666); }' +
+                '.success-modal-details p:last-child { margin-bottom: 0; }' +
+                '.success-modal-details i { color: var(--first-color, #ff9900); margin-right: 8px; }' +
+                '.success-modal-btn { display: inline-flex; align-items: center; gap: 8px; padding: 1rem 2rem; font-size: 1rem; }' +
+                '.success-modal-btn i { color: inherit; }';
+            document.head.appendChild(style);
+            
+            document.body.appendChild(modal);
+            
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                    window.location.href = 'index.html';
+                }
+            });
+        }
+
+        /*=============== PROCESS PAYMENT ===============*/
+        function processPayment() {
+            var orderData = safeParseJSON(localStorage.getItem('orderData'), null);
+            var paymentMethod = orderData ? orderData.payment : 'card';
+            var payButton = document.getElementById('pay-now');
+            var payButtonText = document.getElementById('pay-button-text');
+            var cart = getCart();
+            var total = calculateTotal();
+            
+            var orderNumber = 'TJ-' + Date.now().toString().slice(-8);
+            
+            var orderNumDisplay = document.getElementById('order-number-display');
+            if (orderNumDisplay) {
+                orderNumDisplay.textContent = orderNumber;
+            }
+            
+            if (cart.length === 0) {
+                showToast('No items in your order', 'error');
+                resetPayButton();
+                return;
+            }
+            
+            if (paymentMethod === 'bank') {
+                if (payButton) {
+                    payButton.disabled = true;
+                    payButtonText.innerHTML = '<i class="bx bx-check-circle"></i> Processing...';
+                }
+                
+                var pendingOrder = {
+                    orderData: orderData,
+                    cart: cart,
+                    total: total,
+                    orderNumber: orderNumber,
+                    status: 'pending_transfer',
+                    createdAt: new Date().toISOString()
+                };
+                localStorage.setItem('pendingOrder', JSON.stringify(pendingOrder));
+                localStorage.removeItem('cart');
+                localStorage.removeItem('orderData');
+                
+                showToast('Order received!', 'success');
+                
+                setTimeout(function() {
+                    showSuccessModal(orderNumber, total);
+                }, 1000);
+                return;
+            }
+            
+            var cardNumber = document.getElementById('cardNumber');
+            var cardExpiry = document.getElementById('cardExpiry');
+            var cardCvc = document.getElementById('cardCvc');
+            var cardName = document.getElementById('cardName');
+            
+            if (cardNumber && cardNumber.value.replace(/\s/g, '').length < 16) {
+                showToast('Please enter a valid card number (16 digits)', 'error');
+                resetPayButton();
+                return;
+            }
+            
+            if (cardExpiry && cardExpiry.value.length < 5) {
+                showToast('Please enter a valid expiry date (MM/YY)', 'error');
+                resetPayButton();
+                return;
+            }
+            
+            if (cardCvc && cardCvc.value.length < 3) {
+                showToast('Please enter a valid CVC (3-4 digits)', 'error');
+                resetPayButton();
+                return;
+            }
+            
+            if (cardName && !cardName.value.trim()) {
+                showToast('Please enter the name on card', 'error');
+                resetPayButton();
+                return;
+            }
+            
+            if (payButton) {
+                payButton.disabled = true;
+                payButtonText.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Processing...';
+            }
+            
+            setTimeout(function() {
+                localStorage.removeItem('cart');
+                localStorage.removeItem('orderData');
+                
+                showToast('Payment successful! Order #' + orderNumber, 'success');
+                
+                setTimeout(function() {
+                    showSuccessModal(orderNumber, total);
+                }, 1000);
+            }, 2000);
+        }
+
+        /*=============== CHANGE HEADER STYLES ===============*/
+        function scrollHeader() {
+            var header = document.getElementById('header');
+            if (header) {
+                if (window.scrollY >= 50) {
+                    header.classList.add('scroll-header');
+                } else {
+                    header.classList.remove('scroll-header');
+                }
+            }
+        }
+        window.addEventListener('scroll', scrollHeader);
+
+        /*=============== SHOW SCROLL UP ===============*/
+        function scrollUp() {
+            var scrollUpEl = document.getElementById('scroll-up');
+            if (scrollUpEl) {
+                if (window.scrollY >= 350) {
+                    scrollUpEl.classList.add('show-scroll');
+                } else {
+                    scrollUpEl.classList.remove('show-scroll');
+                }
+            }
+        }
+        window.addEventListener('scroll', scrollUp);
+
+        /*=============== PAY NOW BUTTON ===============*/
+        var payNowBtn = document.getElementById('pay-now');
+        if (payNowBtn) {
+            payNowBtn.addEventListener('click', processPayment);
+        }
+
+        /*=============== DARK LIGHT THEME ===============*/
+        var themeButton = document.getElementById('theme-button');
+        var darkTheme = 'dark-theme';
+        var iconTheme = 'bx-sun';
+        var moonIcon = 'bx-moon';
+        
+        var selectedTheme = localStorage.getItem('selected-theme');
+        
+        // Apply saved theme on page load
+        if (selectedTheme === 'dark') {
+            document.body.classList.add(darkTheme);
+            if (themeButton) {
+                themeButton.classList.remove(moonIcon);
+                themeButton.classList.add(iconTheme);
+            }
+        } else {
+            if (themeButton) {
+                themeButton.classList.remove(iconTheme);
+                themeButton.classList.add(moonIcon);
+            }
+        }
+        
+        if (themeButton) {
+            themeButton.addEventListener('click', function() {
+                document.body.classList.toggle(darkTheme);
+                var isDark = document.body.classList.contains(darkTheme);
+                
+                if (isDark) {
+                    this.classList.remove(moonIcon);
+                    this.classList.add(iconTheme);
+                } else {
+                    this.classList.remove(iconTheme);
+                    this.classList.add(moonIcon);
+                }
+                
+                localStorage.setItem('selected-theme', isDark ? 'dark' : 'light');
+                console.log('Theme toggled to: ' + (isDark ? 'dark' : 'light'));
+            });
+        }
+
+        /*=============== INITIALIZE ON PAGE LOAD ===============*/
+        function initializePage() {
+            var orderData = safeParseJSON(localStorage.getItem('orderData'), null);
+            if (!orderData) {
+                showToast('No order found. Redirecting to home...', 'info');
+                setTimeout(function() {
+                    window.location.href = 'index.html';
+                }, 1500);
+                return;
+            }
+            
+            var orderNumber = 'TJ-' + Date.now().toString().slice(-8);
+            var orderNumDisplay = document.getElementById('order-number-display');
+            if (orderNumDisplay) {
+                orderNumDisplay.textContent = orderNumber;
+            }
+            
+            renderPayoutItems();
+            renderCustomerInfo();
+            renderPaymentMethod();
+            setupPaymentMethodUI();
+            setupCardInputFormatting();
+            
+            if (orderData) {
+                showToast('Review your order to complete payment', 'success');
+            }
+            
+            var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('order') === 'success') {
+                var orderNum = urlParams.get('orderNum');
+                showToast('Thank you for your order!' + (orderNum ? ' Order #' + orderNum : ''), 'success');
+            }
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            initializePage();
+        }
+    </script>
+
+    <style>
+        /*=============== HEADER FIX - Ensure theme button is visible ===============*/
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--container-color, #fff);
+            z-index: 100;
+            transition: 0.3s;
+        }
+        
+        .nav__btns {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav__btns i {
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: var(--title-color, #333);
+        }
+        
+        .change-theme {
+            display: inline-flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /*=============== PAYOUT STYLES ===============*/
+        .payout {
+            padding-top: 8rem;
+            min-height: 100vh;
+        }
+
+        .payout__secure {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #10b981;
+            font-weight: var(--font-medium);
+            margin-bottom: 1rem;
+        }
+
+        .payout__secure i {
+            font-size: 1.5rem;
+        }
+
+        .payout__container {
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .payout__section-title {
+            font-size: var(--h3-font-size);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .payout__order-summary {
+            background: var(--container-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .payout__item {
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+
+        .payout__item:last-child {
+            border-bottom: none;
+        }
+
+        .payout__item-img {
+            position: relative;
+        }
+
+        .payout__item-img img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .payout__item-qty {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--first-color);
+            color: #fff;
+            font-size: 0.7rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--font-bold);
+        }
+
+        .payout__item-info h4 {
+            font-size: var(--normal-font-size);
+            margin-bottom: 0.25rem;
+        }
+
+        .payout__item-price {
+            font-size: var(--small-font-size);
+            color: var(--text-color);
+        }
+
+        .payout__item-total {
+            font-weight: var(--font-bold);
+            color: var(--first-color);
+        }
+
+        .payout__summary-totals {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .payout__summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: var(--normal-font-size);
+        }
+
+        .payout__total {
+            font-size: var(--h3-font-size);
+            font-weight: var(--font-bold);
+            padding-top: 0.75rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .payout__customer-info {
+            background: var(--container-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .customer-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .customer-info-item.full-width {
+            grid-column: span 2;
+        }
+
+        .customer-info-item label {
+            font-size: var(--small-font-size);
+            color: var(--text-color-light);
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .customer-info-item span {
+            font-size: var(--normal-font-size);
+            color: var(--title-color);
+        }
+
+        /*=============== PAYMENT METHOD DISPLAY ===============*/
+        .payout__payment-info {
+            background: var(--container-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method-selected {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--body-color);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .payment-method-selected i {
+            font-size: 1.5rem;
+            color: var(--first-color);
+        }
+
+        .payment-method-selected span {
+            font-weight: var(--font-medium);
+            color: var(--title-color);
+        }
+
+        .payment-method-note {
+            font-size: var(--small-font-size);
+            color: var(--text-color);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .payout__payment-section {
+            background: var(--container-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .card-form {
+            padding: 1rem 0;
+        }
+
+        .card-form__header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: var(--font-medium);
+        }
+
+        .card-form__header i {
+            font-size: 1.5rem;
+            color: var(--first-color);
+        }
+
+        .card-form__input-group {
+            margin-bottom: 1rem;
+        }
+
+        .card-form__input-group label {
+            display: block;
+            font-size: var(--small-font-size);
+            margin-bottom: 0.5rem;
+            color: var(--title-color);
+            font-weight: var(--font-medium);
+        }
+
+        .card-form__input-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--body-color);
+            color: var(--title-color);
+            font-size: var(--normal-font-size);
+            transition: 0.3s;
+        }
+
+        .card-form__input-group input:focus {
+            outline: none;
+            border-color: var(--first-color);
+        }
+
+        .card-input-wrapper {
+            position: relative;
+        }
+
+        .card-icons {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .card-icons i {
+            font-size: 1.25rem;
+            color: var(--text-color-light);
+        }
+
+        .card-form__row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .cvc-wrapper {
+            position: relative;
+        }
+
+        .cvc-wrapper i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color-light);
+            cursor: help;
+        }
+
+        .card-form__secure {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: var(--small-font-size);
+            color: var(--text-color);
+        }
+
+        .card-form__secure i {
+            color: #10b981;
+        }
+
+        .payout__banktransfer {
+            padding: 1rem 0;
+        }
+
+        .banktransfer-info {
+            background: var(--body-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .banktransfer-info h4 {
+            margin-bottom: 1rem;
+            color: var(--first-color);
+        }
+
+        .banktransfer-info p {
+            margin-bottom: 0.5rem;
+            font-size: var(--normal-font-size);
+        }
+
+        .banktransfer-note {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+            font-style: italic;
+            color: var(--text-color);
+        }
+
+        .banktransfer-note i {
+            color: var(--first-color);
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--first-color);
+            cursor: pointer;
+            padding: 4px 8px;
+            margin-left: 8px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: var(--first-color);
+            color: #fff;
+        }
+
+        .banktransfer-waiting {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            border: 1px solid var(--first-color);
+        }
+
+        .whatsapp-instruction {
+            color: var(--title-color);
+        }
+
+        .whatsapp-instruction > p {
+            margin-bottom: 0.75rem;
+            font-weight: var(--font-medium);
+        }
+
+        .whatsapp-instruction ol {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .whatsapp-instruction li {
+            margin-bottom: 0.5rem;
+            font-size: var(--small-font-size);
+            line-height: 1.5;
+        }
+
+        .whatsapp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #25D366;
+            text-decoration: none;
+            font-weight: var(--font-medium);
+            transition: 0.3s;
+        }
+
+        .whatsapp-link:hover {
+            text-decoration: underline;
+        }
+
+        .whatsapp-icon {
+            color: #25D366;
+        }
+
+        .payout__actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .payout__submit {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            font-size: var(--normal-font-size);
+        }
+
+        .payout__submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        #pay-amount {
+            padding-left: 0.75rem;
+            border-left: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .payout__trust-section {
+            background: var(--container-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .trust-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .trust-badge {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .trust-badge i {
+            font-size: 2rem;
+            color: var(--first-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-badge h4 {
+            font-size: var(--normal-font-size);
+            margin-bottom: 0.25rem;
+        }
+
+        .trust-badge p {
+            font-size: var(--small-font-size);
+            color: var(--text-color);
+        }
+
+        .payout__empty {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .payout__empty i {
+            font-size: 3rem;
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+        }
+
+        /*=============== CTA BUTTONS - BRIGHT ORANGE IN ALL MODES ===============*/
+        .payout__submit {
+            background: var(--first-color) !important;
+            color: #fff !important;
+            border: 2px solid var(--first-color) !important;
+        }
+
+        .payout__submit:hover {
+            background: transparent !important;
+            color: var(--first-color) !important;
+        }
+
+        .payout__submit i {
+            color: #fff !important;
+        }
+
+        .payout__submit:hover i {
+            color: var(--first-color) !important;
+        }
+
+        .payout__submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        @media screen and (max-width: 992px) {
+            .payout__container {
+                grid-template-columns: 1fr;
+            }
+            
+            .payout__trust-section {
+                position: static;
+            }
+            
+            .trust-badges {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .trust-badge {
+                flex: 1;
+                min-width: 150px;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .customer-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .customer-info-item.full-width {
+                grid-column: span 1;
+            }
+            
+            .card-form__row {
+                grid-template-columns: 1fr;
+            }
+            
+            .payout__actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .payout__actions a,
+            .payout__submit {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</body>
+</html>

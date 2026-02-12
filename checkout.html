@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!--=============== BOXICONS ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <!--=============== SONNER TOAST ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sonner@1.4.0/dist/sonner.css">
+    <script src="https://cdn.jsdelivr.net/npm/sonner@1.4.0/dist/sonner.umd.js"></script>
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <title>Checkout</title>
+</head>
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">
+                <i class='bx bxs-watch nav__logo-icon'></i> ROLEX
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html#featured" class="nav__link">Featured</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html#products" class="nav__link">Products</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html#new" class="nav__link">New</a>
+                    </li>
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class='bx bx-x' ></i>
+                </div>
+            </div>
+
+            <div class="nav__btns">
+                <!-- Theme change button -->
+                <i class='bx bx-moon change-theme' id="theme-button"></i>
+
+                <div class="nav__shop" id="cart-shop">
+                    <i class='bx bx-shopping-bag' ></i>
+                    <span id="cart-count">0</span>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-grid-alt' ></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--==================== CART ====================-->
+    <div class="cart" id="cart">
+        <i class='bx bx-x cart__close' id="cart-close"></i>
+
+        <h2 class="cart__title-center">My Cart</h2>
+
+        <div class="cart__container" id="cart-container">
+            <!-- Dynamic cart items will be rendered here -->
+        </div>
+
+        <div class="cart__prices">
+            <span class="cart__prices-item"><span id="cart-items-count">0</span> items</span>
+            <span class="cart__prices-total">₦<span id="cart-total">0</span></span>
+        </div>
+
+        <div class="cart__checkout" id="cart-checkout-section" style="display: none;">
+            <a href="checkout.html" class="button cart__checkout-btn" style="width: 100%; text-align: center;">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!--==================== MAIN ====================-->
+    <main class="main">
+        <!--==================== CHECKOUT ====================-->
+        <section class="checkout section container">
+            <h2 class="section__title">
+                Checkout
+            </h2>
+
+            <div class="checkout__container grid">
+                <!-- Cart Items Section -->
+                <div class="checkout__cart">
+                    <h3 class="checkout__section-title">Your Order</h3>
+                    
+                    <div id="checkout-items">
+                        <!-- Dynamic checkout items will be rendered here -->
+                    </div>
+
+                    <div class="checkout__totals">
+                        <div class="checkout__totals-row">
+                            <span>Subtotal</span>
+                            <span>₦<span id="checkout-subtotal">0</span></span>
+                        </div>
+                        <div class="checkout__totals-row">
+                            <span>Shipping</span>
+                            <span id="checkout-shipping">Free</span>
+                        </div>
+                        <div class="checkout__totals-row checkout__total">
+                            <span>Total</span>
+                            <span>₦<span id="checkout-total">0</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing Form Section -->
+                <div class="checkout__form">
+                    <h3 class="checkout__section-title">Billing Information</h3>
+                    
+                    <form id="checkout-form" class="checkout__form-grid">
+                        <div class="form__group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                        </div>
+
+                        <div class="form__group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                        </div>
+
+                        <div class="form__group full-width">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+
+                        <div class="form__group full-width">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+234 801 234 5678" required>
+                        </div>
+
+                        <div class="form__group full-width">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" placeholder="123 Street Name, Area" required>
+                        </div>
+
+                        <div class="form__group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" placeholder="Lagos" required>
+                        </div>
+
+                        <div class="form__group">
+                            <label for="state">State</label>
+                            <select id="state" name="state" required>
+                                <option value="">Select State</option>
+                                <option value="Lagos">Lagos</option>
+                                <option value="Abuja">Abuja (FCT)</option>
+                                <option value="Rivers">Rivers</option>
+                                <option value="Delta">Delta</option>
+                                <option value="Edo">Edo</option>
+                                <option value="Enugu">Enugu</option>
+                                <option value="Imo">Imo</option>
+                                <option value="Oyo">Oyo</option>
+                                <option value="Ogun">Ogun</option>
+                                <option value="Kano">Kano</option>
+                                <option value="Kaduna">Kaduna</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form__group full-width">
+                            <label for="notes">Order Notes (Optional)</label>
+                            <textarea id="notes" name="notes" rows="4" placeholder="Special instructions for delivery..."></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="checkout__payment">
+                <h3 class="checkout__section-title">Payment Method</h3>
+                
+                <div class="payment__methods">
+                    <label class="payment__method">
+                        <input type="radio" name="payment" value="card" checked>
+                        <span class="payment__method-label">
+                            <i class='bx bx-credit-card'></i>
+                            Credit/Debit Card
+                        </span>
+                    </label>
+                    
+                    <label class="payment__method">
+                        <input type="radio" name="payment" value="bank">
+                        <span class="payment__method-label">
+                            <i class='bx bx-building'></i>
+                            Bank Transfer
+                        </span>
+                    </label>
+                </div>
+
+                <div class="checkout__actions">
+                    <a href="index.html" class="button button--gray button--small">
+                        <i class='bx bx-arrow-back'></i> Continue Shopping
+                    </a>
+                    
+                    <button type="button" class="button checkout__submit" id="proceed-payment">
+                        Proceed to Payment <i class='bx bx-lock-alt'></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer section">
+        <div class="footer__container container grid">
+            <div class="footer__content">
+                <h3 class="footer__title">Our information</h3>
+
+                <ul class="footer__list">
+                    <li>Haruk Estate</li>
+                    <li>Rivers, Nigeria</li>
+                    <li>+234 123 456 789</li>
+                </ul>
+            </div>
+            <div class="footer__content">
+                <h3 class="footer__title">About Us</h3>
+
+                <ul class="footer__links">
+                    <li>
+                        <a href="#" class="footer__link">Support Center</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Customer Support</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Copy Right</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Product</h3>
+
+                <ul class="footer__links">
+                    <li>
+                        <a href="#" class="footer__link">Wrist Watches</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Smart Watches</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Accessories</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Watch Bands</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Social</h3>
+
+                <ul class="footer__social">
+                    <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-facebook'></i>
+                    </a>
+
+                    <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-twitter' ></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-instagram' ></i>
+                    </a>
+                </ul>
+            </div>
+        </div>
+
+        <span class="footer__copy">&#169; 2026 Oluawtoyin Ojumoro. All rights reserved. Built with passion.</span>
+    </footer>
+
+    <!--=============== SCROLL UP ===============-->
+    <a href="#" class="scrollup" id="scroll-up"> 
+        <i class='bx bx-up-arrow-alt scrollup__icon' ></i>
+    </a>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="assets/js/main.js"></script>
+
+    <!--=============== CHECKOUT JS ===============-->
+    <script>
+        /*=============== SONNER TOAST INITIALIZATION ===============*/
+        const Toaster = window.Toaster || window.sonner?.Toaster;
+        let toaster = null;
+        
+        if (typeof Toaster === 'function') {
+            toaster = new Toaster({
+                position: 'top-right',
+                toastOptions: {
+                    duration: 3000,
+                    style: {
+                        background: '#333',
+                        color: '#fff',
+                    },
+                }
+            });
+        }
+
+        /*=============== FALLBACK TOAST FUNCTION ===============*/
+        function showToast(message, type = 'success') {
+            if (toaster && typeof toaster[type] === 'function') {
+                toaster[type](message);
+                return;
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification toast-' + type;
+            toast.innerHTML = '<i class="bx ' + (type === 'success' ? 'bx-check-circle' : type === 'error' ? 'bx-error-circle' : 'bx-info-circle') + '"></i><span>' + message + '</span>';
+            toast.style.cssText = 'position: fixed; top: 20px; right: 20px; background: ' + (type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6') + '; color: #fff; padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 10px; z-index: 9999; animation: slideIn 0.3s ease; font-family: var(--body-font);';
+            
+            if (!document.getElementById('toast-styles')) {
+                const style = document.createElement('style');
+                style.id = 'toast-styles';
+                style.textContent = '@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } } @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }';
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(function() {
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(function() {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        /*=============== CART FUNCTIONS ===============*/
+        function getCart() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
+
+        function saveCartToStorage(cartData) {
+            localStorage.setItem('cart', JSON.stringify(cartData));
+            updateCartUI();
+            updateCheckoutUI();
+        }
+
+        function removeFromCart(productId) {
+            const cart = getCart();
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                showToast(item.name + ' removed from cart', 'error');
+            }
+            const newCart = cart.filter(item => item.id !== productId);
+            saveCartToStorage(newCart);
+        }
+
+        function updateQuantity(productId, change) {
+            const cart = getCart();
+            const item = cart.find(item => item.id === productId);
+            
+            if (item) {
+                item.quantity += change;
+                
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    saveCartToStorage(cart);
+                    showToast(item.name + ' quantity: ' + item.quantity, 'info');
+                }
+            }
+        }
+
+        function calculateTotals() {
+            const cart = getCart();
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            return { totalItems, totalPrice };
+        }
+
+        function renderCart() {
+            const cartContainer = document.getElementById('cart-container');
+            const { totalItems, totalPrice } = calculateTotals();
+            
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = totalItems;
+            }
+            
+            const itemsCountEl = document.getElementById('cart-items-count');
+            const totalEl = document.getElementById('cart-total');
+            
+            if (itemsCountEl) itemsCountEl.textContent = totalItems;
+            if (totalEl) totalEl.textContent = totalPrice.toLocaleString();
+            
+            const checkoutSection = document.getElementById('cart-checkout-section');
+            if (checkoutSection) {
+                const cart = getCart();
+                if (cart.length > 0) {
+                    checkoutSection.style.display = 'block';
+                } else {
+                    checkoutSection.style.display = 'none';
+                }
+            }
+            
+            if (cartContainer) {
+                const cart = getCart();
+                if (cart.length === 0) {
+                    cartContainer.innerHTML = `
+                        <div style="text-align: center; padding: 2rem;">
+                            <i class='bx bx-shopping-bag' style="font-size: 3rem; color: var(--text-color-light); margin-bottom: 1rem;"></i>
+                            <p style="color: var(--text-color);">Your cart is empty</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                cartContainer.innerHTML = cart.map(item => `
+                    <article class="cart__card" data-id="${item.id}">
+                        <div class="cart__box">
+                            <img src="${item.img}" alt="${item.name}" class="cart__img">
+                        </div>
+                        
+                        <div class="cart__details">
+                            <h3 class="cart__title">${item.name}</h3>
+                            <span class="cart__price">${item.price.toLocaleString()}</span>
+                            
+                            <div class="cart__amount">
+                                <div class="cart__amount-content">
+                                    <span class="cart__amount-box cart__minus" data-id="${item.id}">
+                                        <i class='bx bx-minus'></i>
+                                    </span>
+                                    
+                                    <span class="cart__amount-number">${item.quantity}</span>
+                                    
+                                    <span class="cart__amount-box cart__plus" data-id="${item.id}">
+                                        <i class='bx bx-plus'></i>
+                                    </span>
+                                </div>
+                                
+                                <i class='bx bx-trash-alt cart__amount-trash cart__remove' data-id="${item.id}"></i>
+                            </div>
+                        </div>
+                    </article>
+                `).join('');
+                
+                document.querySelectorAll('.cart__minus').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        updateQuantity(btn.dataset.id, -1);
+                    });
+                });
+                
+                document.querySelectorAll('.cart__plus').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        updateQuantity(btn.dataset.id, 1);
+                    });
+                });
+                
+                document.querySelectorAll('.cart__remove').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        removeFromCart(btn.dataset.id);
+                    });
+                });
+            }
+        }
+
+        function updateCartUI() {
+            renderCart();
+        }
+
+        function updateCheckoutUI() {
+            const checkoutItems = document.getElementById('checkout-items');
+            const cart = getCart();
+            const { totalItems, totalPrice } = calculateTotals();
+            
+            const subtotalEl = document.getElementById('checkout-subtotal');
+            const totalEl = document.getElementById('checkout-total');
+            
+            if (subtotalEl) subtotalEl.textContent = totalPrice.toLocaleString();
+            if (totalEl) totalEl.textContent = totalPrice.toLocaleString();
+            
+            if (checkoutItems) {
+                if (cart.length === 0) {
+                    checkoutItems.innerHTML = `
+                        <div class="checkout__empty">
+                            <i class='bx bx-shopping-bag'></i>
+                            <p>Your cart is empty</p>
+                            <a href="index.html" class="button">Continue Shopping</a>
+                        </div>
+                    `;
+                    const paymentSection = document.querySelector('.checkout__payment');
+                    if (paymentSection) {
+                        paymentSection.style.display = 'none';
+                    }
+                    return;
+                }
+                
+                const paymentSection = document.querySelector('.checkout__payment');
+                if (paymentSection) {
+                    paymentSection.style.display = 'block';
+                }
+                
+                checkoutItems.innerHTML = cart.map(item => `
+                    <div class="checkout__item" data-id="${item.id}">
+                        <div class="checkout__item-img">
+                            <img src="${item.img}" alt="${item.name}">
+                        </div>
+                        <div class="checkout__item-details">
+                            <h4 class="checkout__item-title">${item.name}</h4>
+                            <span class="checkout__item-price">₦${item.price.toLocaleString()} each</span>
+                        </div>
+                        <div class="checkout__item-actions">
+                            <div class="checkout__quantity">
+                                <button class="checkout__qty-btn checkout__qty-minus" data-id="${item.id}">-</button>
+                                <span class="checkout__qty-number">${item.quantity}</span>
+                                <button class="checkout__qty-btn checkout__qty-plus" data-id="${item.id}">+</button>
+                            </div>
+                            <span class="checkout__item-total">₦${(item.price * item.quantity).toLocaleString()}</span>
+                            <button class="checkout__item-remove" data-id="${item.id}">
+                                <i class='bx bx-trash-alt'></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.querySelectorAll('.checkout__qty-minus').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        updateQuantity(btn.dataset.id, -1);
+                        updateCheckoutUI();
+                    });
+                });
+                
+                document.querySelectorAll('.checkout__qty-plus').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        updateQuantity(btn.dataset.id, 1);
+                        updateCheckoutUI();
+                    });
+                });
+                
+                document.querySelectorAll('.checkout__item-remove').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        removeFromCart(btn.dataset.id);
+                        updateCheckoutUI();
+                    });
+                });
+            }
+        }
+
+        /*=============== NAVIGATION ===============*/
+        const navMenu = document.getElementById('nav-menu'),
+              navToggle = document.getElementById('nav-toggle'),
+              navClose = document.getElementById('nav-close')
+
+        if(navToggle){
+           navToggle.addEventListener('click', () =>{
+              navMenu.classList.add('show-menu')
+           })
+        }
+
+        if(navClose){
+           navClose.addEventListener('click', () =>{
+              navMenu.classList.remove('show-menu')
+           })
+        }
+
+        const navLink = document.querySelectorAll('.nav__link')
+        const linkAction = () =>{
+           const navMenu = document.getElementById('nav-menu')
+           navMenu.classList.remove('show-menu')
+        }
+        navLink.forEach(n => n.addEventListener('click', linkAction))
+
+        /*=============== SCROLL EFFECTS ===============*/
+        const scrollHeader = () =>{
+           const header = document.getElementById('header')
+           this.scrollY >= 50 ? header.classList.add('scroll-header') 
+                             : header.classList.remove('scroll-header')
+        }
+        window.addEventListener('scroll', scrollHeader)
+
+        const scrollUp = () =>{
+            const scrollUp = document.getElementById('scroll-up')
+            this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
+                                 : scrollUp.classList.remove('show-scroll')
+        }
+        window.addEventListener('scroll', scrollUp)
+
+        /*=============== CART TOGGLE ===============*/
+        const cartEl = document.getElementById('cart'),
+              cartShopEl = document.getElementById('cart-shop'),
+              cartCloseEl = document.getElementById('cart-close')
+
+        if(cartShopEl){
+            cartShopEl.addEventListener('click', () =>{
+                cartEl.classList.add('show-cart')
+            })
+        }
+
+        if(cartCloseEl){
+            cartCloseEl.addEventListener('click', () =>{
+                cartEl.classList.remove('show-cart')
+            })
+        }
+
+        /*=============== PROCEED TO PAYMENT ===============*/
+        const proceedBtn = document.getElementById('proceed-payment');
+        if (proceedBtn) {
+            proceedBtn.addEventListener('click', function() {
+                const form = document.getElementById('checkout-form');
+                const requiredFields = form ? form.querySelectorAll('input[required], select[required]') : [];
+                let isValid = true;
+                
+                if (form) {
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            field.style.borderColor = 'var(--first-color)';
+                        } else {
+                            field.style.borderColor = '';
+                        }
+                    });
+                }
+                
+                if (!isValid) {
+                    showToast('Please fill in all required fields', 'error');
+                    return;
+                }
+                
+                const cart = getCart();
+                if (cart.length === 0) {
+                    showToast('Your cart is empty', 'error');
+                    return;
+                }
+                
+                const { totalPrice } = calculateTotals();
+                const formData = new FormData(form);
+                const orderData = {
+                    customer: {
+                        firstName: formData.get('firstName'),
+                        lastName: formData.get('lastName'),
+                        email: formData.get('email'),
+                        phone: formData.get('phone')
+                    },
+                    shipping: {
+                        address: formData.get('address'),
+                        city: formData.get('city'),
+                        state: formData.get('state'),
+                        country: 'Nigeria'
+                    },
+                    notes: formData.get('notes'),
+                    payment: document.querySelector('input[name="payment"]:checked')?.value || 'card',
+                    items: cart,
+                    total: totalPrice
+                };
+                
+                localStorage.setItem('orderData', JSON.stringify(orderData));
+                
+                // Force synchronous write and verify
+                const verifyData = localStorage.getItem('orderData');
+                
+                if (!verifyData) {
+                    showToast('Error saving order data. Please try again.', 'error');
+                    return;
+                }
+                
+                console.log('Order data saved:', orderData);
+                console.log('Cart items:', cart);
+                
+                showToast('Order information saved! Redirecting to payment...', 'success');
+                
+                setTimeout(() => {
+                    console.log('Redirecting to payout.html...');
+                    window.location.href = 'payout.html';
+                }, 1500);
+            });
+        }
+
+        /*=============== THEME ===============*/ 
+        const themeButton = document.getElementById('theme-button')
+        const darkTheme = 'dark-theme'
+        const iconTheme = 'bx-sun'
+
+        const selectedTheme = localStorage.getItem('selected-theme')
+        const selectedIcon = localStorage.getItem('selected-icon')
+
+        const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+        const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bx bx-moon' : 'bx bx-sun'
+
+        if (selectedTheme) {
+          document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+          if (themeButton) {
+            themeButton.classList[selectedIcon === 'bx bx-moon' ? 'add' : 'remove'](iconTheme)
+          }
+        }
+
+        if (themeButton) {
+            themeButton.addEventListener('click', () => {
+                document.body.classList.toggle(darkTheme)
+                themeButton.classList.toggle(iconTheme)
+                localStorage.setItem('selected-theme', getCurrentTheme())
+                localStorage.setItem('selected-icon', getCurrentIcon())
+            });
+        }
+
+        /*=============== INITIALIZE ===============*/
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Initializing checkout page...');
+            const cart = getCart();
+            console.log('Cart has', cart.length, 'items');
+            renderCart();
+            updateCheckoutUI();
+            
+            if (cart.length > 0) {
+                showToast('Your cart has ' + cart.length + ' item(s)', 'success');
+            } else {
+                showToast('Your cart is empty', 'info');
+            }
+        });
+    </script>
+
+    <style>
+        /*=============== CHECKOUT STYLES ===============*/
+        .checkout {
+            padding-top: 8rem;
+        }
+
+        .checkout__container {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .checkout__cart {
+            background: var(--container-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .checkout__section-title {
+            font-size: var(--h3-font-size);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .checkout__item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+
+        .checkout__item:last-child {
+            border-bottom: none;
+        }
+
+        .checkout__item-img img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .checkout__item-title {
+            font-size: var(--normal-font-size);
+            margin-bottom: 0.25rem;
+        }
+
+        .checkout__item-price {
+            color: var(--first-color);
+            font-size: var(--small-font-size);
+        }
+
+        .checkout__item-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .checkout__quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkout__qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--border-color);
+            background: var(--body-color);
+            color: var(--title-color);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .checkout__qty-btn:hover {
+            background: var(--first-color);
+            color: #fff;
+            border-color: var(--first-color);
+        }
+
+        .checkout__qty-number {
+            min-width: 30px;
+            text-align: center;
+            font-weight: var(--font-medium);
+        }
+
+        .checkout__item-total {
+            font-weight: var(--font-bold);
+            color: var(--first-color);
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .checkout__item-remove {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: 0.3s;
+        }
+
+        .checkout__item-remove:hover {
+            color: var(--first-color);
+        }
+
+        .checkout__totals {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .checkout__totals-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: var(--normal-font-size);
+        }
+
+        .checkout__total {
+            font-size: var(--h3-font-size);
+            font-weight: var(--font-bold);
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 0.75rem;
+        }
+
+        .checkout__form {
+            background: var(--container-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .checkout__form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .form__group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form__group.full-width {
+            grid-column: span 2;
+        }
+
+        .form__group label {
+            font-size: var(--small-font-size);
+            margin-bottom: 0.5rem;
+            color: var(--title-color);
+            font-weight: var(--font-medium);
+        }
+
+        .form__group input,
+        .form__group select,
+        .form__group textarea {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--body-color);
+            color: var(--title-color);
+            font-size: var(--normal-font-size);
+            transition: 0.3s;
+        }
+
+        .form__group input:focus,
+        .form__group select:focus,
+        .form__group textarea:focus {
+            outline: none;
+            border-color: var(--first-color);
+        }
+
+        .checkout__payment {
+            margin-top: 2rem;
+            background: var(--container-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .payment__methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .payment__method {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .payment__method input {
+            display: none;
+        }
+
+        .payment__method-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .payment__method input:checked + .payment__method-label {
+            border-color: var(--first-color);
+            background: rgba(255, 153, 0, 0.05);
+        }
+
+        .payment__method-label:hover {
+            border-color: var(--first-color);
+        }
+
+        .payment__method-label i {
+            font-size: 1.5rem;
+            color: var(--first-color);
+        }
+
+        .checkout__actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .checkout__submit {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkout__empty {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .checkout__empty i {
+            font-size: 4rem;
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+        }
+
+        .checkout__empty p {
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--first-color);
+            color: #fff;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav__shop {
+            position: relative;
+        }
+
+        /*=============== CTA BUTTONS - BRIGHT ORANGE IN ALL MODES ===============*/
+        .checkout__submit {
+            background: var(--first-color) !important;
+            color: #fff !important;
+            border: 2px solid var(--first-color) !important;
+        }
+
+        .checkout__submit:hover {
+            background: transparent !important;
+            color: var(--first-color) !important;
+        }
+
+        .checkout__submit i {
+            color: #fff !important;
+        }
+
+        .checkout__submit:hover i {
+            color: var(--first-color) !important;
+        }
+
+        @media screen and (max-width: 767px) {
+            .checkout__form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form__group.full-width {
+                grid-column: span 1;
+            }
+            
+            .checkout__item {
+                grid-template-columns: 60px 1fr;
+            }
+            
+            .checkout__item-actions {
+                grid-column: span 2;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</body>
+</html>
